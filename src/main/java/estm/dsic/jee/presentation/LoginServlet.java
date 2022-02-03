@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import estm.dsic.jee.dal.DBConnection;
 import estm.dsic.jee.dal.User;
 import estm.dsic.jee.dal.UserDao;
@@ -48,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userName", user.getName());
 			response.sendRedirect("jsp/welcome.jsp");
 		} else {
-			System.out.println("user not found");
+			throw new ServletException("utilisateur non trouvé !!!");
 		}
 
 	}

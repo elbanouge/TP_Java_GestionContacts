@@ -6,8 +6,8 @@
 <%
 int id = Integer.parseInt(request.getParameter("id"));
 ContactDao conDao = new ContactDao(DBConnection.getConnection());
-Contact bk = conDao.getContactByID(id);
-request.setAttribute("edit_books", bk);
+Contact con = conDao.getContactByID(id);
+request.setAttribute("edit_contact", con);
 %>
 <!DOCTYPE html>
 <html>
@@ -16,10 +16,10 @@ request.setAttribute("edit_books", bk);
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<title>Edit Book Data</title>
+<title>Modifier les données du contact</title>
 <style>
 .inner {
 	position: relative;
@@ -49,10 +49,10 @@ a {
 <body>
 	<div class="container-fluid">
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand">Book Store</a>
+			<h1>Gestion des contacts</h1>
 			<ul class="navbar-nav ml-auto mt-3 mx-5">
 				<li class="nav-item"><a class="nav-link active"
-					href="index.jsp">Home</a></li>
+					href="welcome.jsp">Accueil</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -60,50 +60,38 @@ a {
 		<div class=" container">
 			<div class="row">
 				<div class="col-12">
-					<h3>Edit Book Details</h3>
-					<form action="../EditBooksServlet" method="post">
+					<h3>Modifier les détails du contact</h3>
+					<form action="../EditContactServlet" method="post">
 						<div class="form-group">
-							<label>Book ID</label> <input class="form-control" name="bkid"
-								value="${edit_books.idC }" required>
+							<label>ID de contact</label> <input class="form-control"
+								name="conID" value="${edit_contact.idC }" readonly="readonly"
+								required>
 						</div>
 						<div class="form-group">
-							<label>Book Name</label> <input class="form-control"
-								name="bkname" value="${edit_books.nom }" required>
+							<label>Nom de contact</label> <input class="form-control"
+								name="conName" value="${edit_contact.nom }" required>
 						</div>
 						<div class="form-group">
-							<label>Description</label> <input class="form-control"
-								name="bkdes" value="${edit_books.adresse}" required>
+							<label>Adresse de contact</label> <input class="form-control"
+								name="conAdr" value="${edit_contact.adresse}" required>
 						</div>
 						<div class="form-group">
-							<label>Author Name</label> <input class="form-control"
-								name="authname" value="${edit_books.email}" required>
+							<label>Email de contact</label> <input class="form-control"
+								name="conEmail" value="${edit_contact.email}" required>
 						</div>
 						<div class="form-group">
-
-							<label>Category</label> <select id="inputState"
-								class="form-control" name="category" required>
-								<option selected disabled>Choose Category</option>
-								<option value="Novel">Novel</option>
-								<option value="Science Fiction">Science Fiction</option>
-								<option value="Drama">Drama</option>
-								<option value="Programming & Development">Programming
-									et Development</option>
-							</select>
+							<label>Télephone de contact</label> <input class="form-control"
+								name="conTel" value="${edit_contact.tel}" required>
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<a class="btn btn-primary" href="welcome.jsp">Cancel</a>
+						<button type="submit" class="btn btn-primary">Modifier</button>
+						<a class="btn btn-primary" href="welcome.jsp">Annuler</a>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+	<script src="../js/script.js" type="text/javascript"></script>
 </body>
 </html>
 

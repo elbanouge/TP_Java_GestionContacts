@@ -38,15 +38,12 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		// make user object
 		User userModel = new User(name, email, password);
 
-		// create a database model
 		UserDao regUser = new UserDao(DBConnection.getConnection());
 		if (regUser.saveUser(userModel)) {
 			response.sendRedirect("jsp/index.jsp");
 		} else {
-
 			response.sendRedirect("jsp/registration.jsp");
 		}
 

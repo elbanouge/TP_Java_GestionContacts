@@ -14,7 +14,6 @@ public class ContactDao {
 		this.con = con;
 	}
 
-	// add books information to database
 	public boolean addCon(Contact contact) {
 		boolean bool = false;
 
@@ -39,13 +38,13 @@ public class ContactDao {
 		return bool;
 	}
 
-	// retrieve the book details from databse
 	public ArrayList<Contact> getContacts(String val) {
 		ArrayList<Contact> arrayList = new ArrayList<Contact>();
 		String req = "SELECT * FROM `gestioncontacts`.`contacts`";
 
 		if (val != null) {
-			req = "SELECT * FROM `gestioncontacts`.`contacts` where nameCon like '" + val + "'";
+			req = "SELECT * FROM `gestioncontacts`.`contacts` where nameCon like '%" + val + "%' or adresseCon like '%"
+					+ val + "%' or emailCon like '%" + val + "%'or telCon like '%" + val + "%' ";
 		}
 
 		try {
@@ -65,7 +64,6 @@ public class ContactDao {
 		return arrayList;
 	}
 
-	// eidt book information
 	public boolean modCon(Contact contact) {
 		boolean bool = false;
 
@@ -91,7 +89,6 @@ public class ContactDao {
 		return bool;
 	}
 
-	// get single book information in edit page
 	public Contact getContactByID(int idCon) {
 		Contact contact = null;
 		String req = "SELECT * FROM `gestioncontacts`.`contacts` WHERE `id_contact` =" + idCon + ";";
@@ -111,7 +108,6 @@ public class ContactDao {
 		return contact;
 	}
 
-	// delete books from database
 	public boolean delCon(int idCon) {
 		boolean bool = false;
 

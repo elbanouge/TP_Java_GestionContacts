@@ -6,21 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import estm.dsic.jee.dal.Contact;
 import estm.dsic.jee.dal.ContactDao;
 import estm.dsic.jee.dal.DBConnection;
 
 /**
- * Servlet implementation class AddBooksServlet
+ * Servlet implementation class DeleteBooksServlet
  */
-@WebServlet("/AddBooksServlet")
-public class AddBooksServlet extends HttpServlet {
+@WebServlet("/DeleteContactsServlet")
+public class DeleteContactsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddBooksServlet() {
+	public DeleteContactsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,19 +33,12 @@ public class AddBooksServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String name = request.getParameter("bkname");
-		String adresse = request.getParameter("bkdes");
-		String email = request.getParameter("authname");
-		String tel = request.getParameter("category");
-		Contact contact = new Contact(name, adresse, email, tel);
+		int cid = Integer.parseInt(request.getParameter("id"));
+
 		try {
 			ContactDao contactDao = new ContactDao(DBConnection.getConnection());
-			if (contactDao.addCon(contact)) {
-				response.sendRedirect("jsp/welcome.jsp");
-			} else {
-				System.out.print("wrong !!!!");
-			}
-
+			contactDao.delCon(cid);
+			response.sendRedirect("jsp/welcome.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -4,12 +4,12 @@
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Error</title>
+<title>Page d'erreur</title>
 </head>
 <body>
 	<center>
-		<h1>Error</h1>
-		<h2 style="color: red;" ><%=exception.getMessage()%><br />
+		<h1>Erreur :</h1>
+		<h2 style="color: red;"><%=exception.getMessage()%><br />
 		</h2>
 	</center>
 </body>

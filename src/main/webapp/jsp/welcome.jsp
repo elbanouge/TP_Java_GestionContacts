@@ -12,21 +12,20 @@ String val = request.getParameter("value");
 System.out.println(val);
 String userName = (String) session.getAttribute("userName");
 if (userName == null) {
-	System.out.println("Error !!!!!!");
+	System.out.println("Erreur !!!!!!");
 	response.sendRedirect("index.jsp");
 }
 
 if (val != null) {
 	conList = conDao.getContacts(val);
-	request.setAttribute("BOOKS_LIST", conList);
+	request.setAttribute("CONTACT_LIST", conList);
 
 } else {
 	conList = conDao.getContacts(null);
-	request.setAttribute("BOOKS_LIST", conList);
+	request.setAttribute("CONTACT_LIST", conList);
 
 }
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -37,10 +36,9 @@ if (val != null) {
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<title>CRUD Application</title>
+<title>Gestion des contacts</title>
 
 <style>
 .inner {
@@ -51,73 +49,67 @@ if (val != null) {
 <body>
 	<div class="container-fluid">
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand">Book Store</a>
-			<h1>
-				Welcome :
-				<%=userName%></h1>
-			<a href="../LogoutServlet">Logout</a><b></b>
-			<form action="../SearchBooksServlet" method="post"
+			<h1>Gestion des contacts</h1>
+			<a class="navbar-brand">Bienvenu(e) : <%=userName%></a> <a
+				href="../LogoutServlet">Se déconnecter</a><b></b>
+			<form action="../SearchContactsServlet" method="post"
 				class="form-inline">
-				<input name="ValS" class="form-control mr-sm-2" type="search"
-					placeholder="Search" value="" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<input style="width: 280px;" name="ValS"
+					class="form-control mr-sm-2" type="search"
+					placeholder="saisir la valeur de recherche" value=""
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
 			</form>
 		</nav>
 	</div>
-	<div class="container">
+	<div style="max-width: 1500px" class="container">
 		<div class="inner">
 			<div class="row">
 				<div class="col-md-3">
-					<h3>Input Book Information</h3>
-					<form action="../AddBooksServlet" method="post">
+					<h3>Saisir les informations du contact</h3>
+					<form action="../AddContactsServlet" method="post">
 						<div class="form-group">
-							<label>Book Name</label> <input class="form-control"
-								name="bkname" placeholder="Book Name" required>
+							<label>Nom de contact</label> <input class="form-control"
+								name="conName" placeholder="Nom" required>
 						</div>
 						<div class="form-group">
-							<label>Description</label> <input class="form-control"
-								name="bkdes" placeholder="Book Name" required>
+							<label>Adresse de contact</label> <input class="form-control"
+								name="conAdr" placeholder="Adresse" required>
 						</div>
 						<div class="form-group">
-							<label>Author Name</label> <input class="form-control"
-								name="authname" placeholder="Book Name" required>
+							<label>Email de contact</label> <input class="form-control"
+								name="conEmail" placeholder="Email" required>
 						</div>
 						<div class="form-group">
-							<label>Category</label> <select id="inputState"
-								class="form-control" name="category" required>
-								<option selected disabled>Choose Category</option>
-								<option value="Novel">Novel</option>
-								<option value="Science Fiction">Science Fiction</option>
-								<option value="Drama">Drama</option>
-								<option value="Programming & Development">Programming et
-									Development</option>
-							</select>
+							<label>Téléphone de contact</label> <input class="form-control"
+								name="conTel" placeholder="Telephone" required>
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<button type="reset" class="btn btn-primary">Reset</button>
+						<button type="submit" class="btn btn-primary">Ajouter</button>
+						<button type="reset" class="btn btn-primary">Réinitialiser</button>
 					</form>
 				</div>
 				<div class="col-md-9">
-					<h3>Book Information From Database</h3>
+					<h3>Informations sur les contacts à partir de la base de
+						données</h3>
 					<table class="table">
 						<thead class="bg-light">
 							<tr>
-								<th scope="col">Book Name</th>
-								<th scope="col">Description</th>
-								<th scope="col">Author</th>
-								<th scope="col">Category</th>
+								<th scope="col">Nom</th>
+								<th scope="col">Adresse</th>
+								<th scope="col">Email</th>
+								<th scope="col">Telephone</th>
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="tempBook" items="${BOOKS_LIST}">
+							<c:forEach var="CONTACT" items="${CONTACT_LIST}">
 								<tr>
-									<td>${tempBook.nom }</td>
-									<td>${tempBook.adresse }</td>
-									<td>${tempBook.email }</td>
-									<td>${tempBook.tel}</td>
-									<td><a href="edit.jsp?id=${tempBook.idC }">Edit</a> <a
-										href="../DeleteBooksServlet?id=${tempBook.idC}">Delete</a></td>
+									<td>${CONTACT.nom }</td>
+									<td>${CONTACT.adresse }</td>
+									<td>${CONTACT.email }</td>
+									<td>${CONTACT.tel}</td>
+									<td><a href="edit.jsp?id=${CONTACT.idC }">Modifier</a> <a
+										href="../DeleteContactsServlet?id=${CONTACT.idC}">Supprimer</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -126,12 +118,7 @@ if (val != null) {
 			</div>
 		</div>
 	</div>
-	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="../js/script.js" type="text/javascript"></script>
 </body>
 </html>

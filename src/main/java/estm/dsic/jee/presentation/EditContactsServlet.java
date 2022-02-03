@@ -13,14 +13,14 @@ import estm.dsic.jee.dal.DBConnection;
 /**
  * Servlet implementation class EditBooksServlet
  */
-@WebServlet("/EditBooksServlet")
-public class EditBooksServlet extends HttpServlet {
+@WebServlet("/EditContactServlet")
+public class EditContactsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditBooksServlet() {
+	public EditContactsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,19 +33,19 @@ public class EditBooksServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		int id = Integer.parseInt(request.getParameter("bkid"));
-		String name = request.getParameter("bkname");
-		String adresse = request.getParameter("bkdes");
-		String email = request.getParameter("authname");
-		String tel = request.getParameter("category");
+
+		int id = Integer.parseInt(request.getParameter("conID"));
+		String name = request.getParameter("conName");
+		String adresse = request.getParameter("conAdr");
+		String email = request.getParameter("conEmail");
+		String tel = request.getParameter("conTel");
 		Contact contact = new Contact(id, name, adresse, email, tel);
 		try {
 			ContactDao contactDao = new ContactDao(DBConnection.getConnection());
 			if (contactDao.modCon(contact)) {
 				response.sendRedirect("jsp/welcome.jsp");
 			} else {
-				System.out.print("wrong cre3dential");
+				System.out.print("Erreur !!!");
 			}
 
 		} catch (Exception e) {
