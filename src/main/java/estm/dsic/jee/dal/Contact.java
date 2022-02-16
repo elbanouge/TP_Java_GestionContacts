@@ -1,14 +1,24 @@
 package estm.dsic.jee.dal;
 
 public class Contact {
-	private int idC;
+	private int id_contact;
 	private String nom;
 	private String adresse;
 	private String email;
 	private String tel;
+	private int id_user;
 
 	public Contact() {
 
+	}
+
+	public Contact(String nom, String adresse, String email, String tel, int id_user) {
+		super();
+		this.nom = nom;
+		this.adresse = adresse;
+		this.email = email;
+		this.tel = tel;
+		this.id_user = id_user;
 	}
 
 	public Contact(String nom, String adresse, String email, String tel) {
@@ -18,20 +28,20 @@ public class Contact {
 		this.tel = tel;
 	}
 
-	public Contact(int idC, String nom, String adresse, String email, String tel) {
-		this.idC = idC;
+	public Contact(int id_contact, String nom, String adresse, String email, String tel) {
+		this.id_contact = id_contact;
 		this.nom = nom;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
 	}
 
-	public int getIdC() {
-		return idC;
+	public int getId_contact() {
+		return id_contact;
 	}
 
-	public void setIdC(int idC) {
-		this.idC = idC;
+	public void setId_contact(int id_contact) {
+		this.id_contact = id_contact;
 	}
 
 	public String getNom() {
@@ -66,9 +76,11 @@ public class Contact {
 		this.tel = tel;
 	}
 
-	@Override
-	public String toString() {
-		return "Contact [idC=" + idC + ", nom=" + nom + ", adresse=" + adresse + ", email=" + email + ", tel=" + tel
-				+ "]";
+	public int getId_user() {
+		return id_user;
+	}
+
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
 	}
 }

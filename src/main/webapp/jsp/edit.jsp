@@ -64,8 +64,8 @@ a {
 					<form action="../EditContactServlet" method="post">
 						<div class="form-group">
 							<label>ID de contact</label> <input class="form-control"
-								name="conID" value="${edit_contact.idC }" readonly="readonly"
-								required>
+								name="conID" value="${edit_contact.id_contact}"
+								readonly="readonly" required>
 						</div>
 						<div class="form-group">
 							<label>Nom de contact</label> <input class="form-control"

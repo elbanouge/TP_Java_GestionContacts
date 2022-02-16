@@ -6,9 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import estm.dsic.jee.business.ContactServices;
 import estm.dsic.jee.dal.Contact;
-import estm.dsic.jee.dal.ContactDao;
-import estm.dsic.jee.dal.DBConnection;
 
 /**
  * Servlet implementation class EditBooksServlet
@@ -16,6 +15,7 @@ import estm.dsic.jee.dal.DBConnection;
 @WebServlet("/EditContactServlet")
 public class EditContactsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ContactServices contactServices;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -23,6 +23,7 @@ public class EditContactsServlet extends HttpServlet {
 	public EditContactsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
+		contactServices = new ContactServices();
 	}
 
 	/**
@@ -41,8 +42,9 @@ public class EditContactsServlet extends HttpServlet {
 		String tel = request.getParameter("conTel");
 		Contact contact = new Contact(id, name, adresse, email, tel);
 		try {
-			ContactDao contactDao = new ContactDao(DBConnection.getConnection());
-			if (contactDao.modCon(contact)) {
+
+			if (contactServices.edit(contact)) {
+
 				response.sendRedirect("jsp/welcome.jsp");
 			} else {
 				System.out.print("Erreur !!!");

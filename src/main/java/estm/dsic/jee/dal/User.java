@@ -2,7 +2,7 @@ package estm.dsic.jee.dal;
 
 public class User {
 
-	private int id;
+	private int id_user;
 	private String name;
 	private String email;
 	private String password;
@@ -10,8 +10,8 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, String name, String email, String password) {
-		this.id = id;
+	public User(int id_user, String name, String email, String password) {
+		this.id_user = id_user;
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -29,11 +29,11 @@ public class User {
 	}
 
 	public int getId() {
-		return id;
+		return id_user;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id_user = id;
 	}
 
 	public String getName() {

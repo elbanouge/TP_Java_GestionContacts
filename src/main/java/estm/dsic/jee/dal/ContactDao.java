@@ -14,10 +14,10 @@ public class ContactDao {
 		this.con = con;
 	}
 
-	public boolean addCon(Contact contact) {
+	public boolean addContact(Contact contact) {
 		boolean bool = false;
 
-		String req = "INSERT INTO `gestioncontacts`.`contacts` (`nameCon`, `adresseCon`, `emailCon`, `telCon`) VALUES (?, ?, ?, ?);";
+		String req = "INSERT INTO `gestioncontacts`.`contacts` (`name`, `adresse`, `email`, `tel`, `id_us`) VALUES (?, ?, ?, ?, ?);";
 		try {
 
 			PreparedStatement ps = this.con.prepareStatement(req);
@@ -25,6 +25,7 @@ public class ContactDao {
 			ps.setString(2, contact.getAdresse());
 			ps.setString(3, contact.getEmail());
 			ps.setString(4, contact.getTel());
+			ps.setInt(5, contact.getId_user());
 
 			if (ps.executeUpdate() >= 1) {
 				bool = true;
@@ -38,13 +39,13 @@ public class ContactDao {
 		return bool;
 	}
 
-	public ArrayList<Contact> getContacts(String val) {
+	public ArrayList<Contact> getContacts(String val, int id) {
 		ArrayList<Contact> arrayList = new ArrayList<Contact>();
-		String req = "SELECT * FROM `gestioncontacts`.`contacts`";
+		String req = "SELECT * FROM `gestioncontacts`.`contacts` where id_us = " + id;
 
 		if (val != null) {
-			req = "SELECT * FROM `gestioncontacts`.`contacts` where nameCon like '%" + val + "%' or adresseCon like '%"
-					+ val + "%' or emailCon like '%" + val + "%'or telCon like '%" + val + "%' ";
+			req = "SELECT * FROM `gestioncontacts`.`contacts` where name like '%" + val + "%' or adresse like '%" + val
+					+ "%' or email like '%" + val + "%'or tel like '%" + val + "%' HAVING id_us = " + id;
 		}
 
 		try {
@@ -52,8 +53,8 @@ public class ContactDao {
 			ResultSet rs = st.executeQuery(req);
 
 			while (rs.next()) {
-				Contact contact = new Contact(rs.getInt("id_contact"), rs.getString("nameCon"),
-						rs.getString("adresseCon"), rs.getString("emailCon"), rs.getString("telCon"));
+				Contact contact = new Contact(rs.getInt("id_contact"), rs.getString("name"), rs.getString("adresse"),
+						rs.getString("email"), rs.getString("tel"));
 				arrayList.add(contact);
 			}
 
@@ -64,10 +65,10 @@ public class ContactDao {
 		return arrayList;
 	}
 
-	public boolean modCon(Contact contact) {
+	public boolean modContact(Contact contact) {
 		boolean bool = false;
 
-		String req = "UPDATE `gestioncontacts`.`contacts` SET `nameCon`=?, `adresseCon`=?, `emailCon`=?, `telCon`=? WHERE  `id_contact`=?;";
+		String req = "UPDATE `gestioncontacts`.`contacts` SET `name`=?, `adresse`=?, `email`=?, `tel`=? WHERE  `id_contact`=?;";
 		try {
 
 			PreparedStatement ps = con.prepareStatement(req);
@@ -75,7 +76,7 @@ public class ContactDao {
 			ps.setString(2, contact.getAdresse());
 			ps.setString(3, contact.getEmail());
 			ps.setString(4, contact.getTel());
-			ps.setInt(5, contact.getIdC());
+			ps.setInt(5, contact.getId_contact());
 
 			if (ps.executeUpdate() >= 1) {
 				bool = true;
@@ -97,8 +98,8 @@ public class ContactDao {
 			ResultSet rs = st.executeQuery(req);
 
 			while (rs.next()) {
-				contact = new Contact(rs.getInt("id_contact"), rs.getString("nameCon"), rs.getString("adresseCon"),
-						rs.getString("emailCon"), rs.getString("telCon"));
+				contact = new Contact(rs.getInt("id_contact"), rs.getString("name"), rs.getString("adresse"),
+						rs.getString("email"), rs.getString("tel"));
 			}
 
 		} catch (SQLException e) {
@@ -108,7 +109,7 @@ public class ContactDao {
 		return contact;
 	}
 
-	public boolean delCon(int idCon) {
+	public boolean delContact(int idCon) {
 		boolean bool = false;
 
 		String req = "DELETE FROM `gestioncontacts`.`contacts` WHERE  `id_contact`=?;";

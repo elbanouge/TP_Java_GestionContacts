@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		HttpSession session = request.getSession();
-		session.removeAttribute("logUser");
+		session.removeAttribute("user");
 		response.sendRedirect("jsp/index.jsp");
 	}
 

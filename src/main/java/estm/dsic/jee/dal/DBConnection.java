@@ -14,6 +14,7 @@ public class DBConnection {
 			// DataSource dataSource = (DataSource)
 			// context.lookup("java:comp/env/jdbc/gestioncontacts");
 			// connection = dataSource.getConnection();
+
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestioncontacts", "root", "admin");
 			System.out.println("Connection succes");

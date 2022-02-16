@@ -1,29 +1,34 @@
 package estm.dsic.jee.business;
 
 import java.sql.Connection;
-
+import estm.dsic.jee.dal.DBConnection;
 import estm.dsic.jee.dal.User;
 import estm.dsic.jee.dal.UserDao;
 
 public class UserServices implements IUserServices {
 
-	private UserDao dao;
+	private UserDao userDao;
 
 	public UserServices() {
-		Connection con = null;
-		dao = new UserDao(con);
+		Connection con = DBConnection.getConnection();
+		userDao = new UserDao(con);
 	}
 
 	@Override
 	public boolean auth(User u) {
 		// TODO Auto-generated method stub
-		return dao.saveUser(u);
+		return userDao.saveUser(u);
 	}
 
 	@Override
 	public User save(String email, String pass) {
 		// TODO Auto-generated method stub
-		return dao.login(email, pass);
+		return userDao.login(email, pass);
 	}
 
+	@Override
+	public User getUserByName(String val) {
+		// TODO Auto-generated method stub
+		return userDao.getUserByName(val);
+	}
 }

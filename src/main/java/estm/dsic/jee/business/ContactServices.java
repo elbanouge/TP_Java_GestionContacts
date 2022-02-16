@@ -4,26 +4,26 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import estm.dsic.jee.dal.Contact;
 import estm.dsic.jee.dal.ContactDao;
+import estm.dsic.jee.dal.DBConnection;
 
 public class ContactServices implements IContactServices {
-
 	private ContactDao contactDao;
 
 	public ContactServices() {
-		Connection connection = null;
+		Connection connection = DBConnection.getConnection();
 		contactDao = new ContactDao(connection);
 	}
 
 	@Override
 	public boolean add(Contact contact) {
 		// TODO Auto-generated method stub
-		return contactDao.addCon(contact);
+		return contactDao.addContact(contact);
 	}
 
 	@Override
-	public ArrayList<Contact> getAll(String req) {
+	public ArrayList<Contact> getAll(String req, int id) {
 		// TODO Auto-generated method stub
-		return contactDao.getContacts(req);
+		return contactDao.getContacts(req, id);
 	}
 
 	@Override
@@ -35,12 +35,12 @@ public class ContactServices implements IContactServices {
 	@Override
 	public boolean edit(Contact contact) {
 		// TODO Auto-generated method stub
-		return contactDao.modCon(contact);
+		return contactDao.modContact(contact);
 	}
 
 	@Override
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
-		return contactDao.delCon(id);
+		return contactDao.delContact(id);
 	}
 }

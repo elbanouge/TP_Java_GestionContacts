@@ -4,13 +4,24 @@
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
 <title>Page d'erreur</title>
 </head>
 <body>
-	<center>
-		<h1>Erreur :</h1>
-		<h2 style="color: red;"><%=exception.getMessage()%><br />
-		</h2>
-	</center>
+
+	<div class="container">
+		<br /> <br />
+		<center>
+			<h1>Erreur :</h1>
+			<h2 style="color: red;"><%=exception.getMessage()%><br />
+			</h2>
+			<br /> <br /> <a href="./index.jsp">
+				<button type="submit" class="btn btn-primary">Rejoignez-nous</button>
+			</a>
+		</center>
+	</div>
 </body>
 </html>

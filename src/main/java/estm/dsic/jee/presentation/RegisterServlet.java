@@ -6,9 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import estm.dsic.jee.dal.DBConnection;
+import estm.dsic.jee.business.UserServices;
 import estm.dsic.jee.dal.User;
-import estm.dsic.jee.dal.UserDao;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -16,6 +15,7 @@ import estm.dsic.jee.dal.UserDao;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UserServices services;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -23,6 +23,7 @@ public class RegisterServlet extends HttpServlet {
 	public RegisterServlet() {
 		super();
 		// TODO Auto-generated constructor stub
+		services = new UserServices();
 	}
 
 	/**
@@ -40,8 +41,7 @@ public class RegisterServlet extends HttpServlet {
 
 		User userModel = new User(name, email, password);
 
-		UserDao regUser = new UserDao(DBConnection.getConnection());
-		if (regUser.saveUser(userModel)) {
+		if (services.auth(userModel)) {
 			response.sendRedirect("jsp/index.jsp");
 		} else {
 			response.sendRedirect("jsp/registration.jsp");
