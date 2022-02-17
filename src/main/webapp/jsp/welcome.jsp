@@ -50,12 +50,9 @@ if (val == null) {
 
 			<form action="../SearchContactsServlet" method="post"
 				class="form-inline">
-				<label>&nbsp; Bienvenu(e) : &nbsp;</label> <input
-					style="border: 0; background-color: white;" class="form-control"
-					name="userName" value="<%=user.getName()%>" readonly="readonly">
-				<input style="width: 280px;" name="ValS"
-					class="form-control mr-sm-2" type="search"
-					placeholder="saisir la valeur de recherche" value=""
+				<label>&nbsp; Bienvenu(e) : &nbsp; <%=user.getName()%>  &nbsp; &nbsp; &nbsp;</label> <input
+					style="width: 280px;" name="ValS" class="form-control mr-sm-2"
+					type="search" placeholder="saisir la valeur de recherche" value=""
 					aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
 				<a style="text-decoration: none;" href="../LogoutServlet">&nbsp;&nbsp;
