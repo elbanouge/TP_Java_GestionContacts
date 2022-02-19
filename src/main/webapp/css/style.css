@@ -1,5 +1,5 @@
 body {
-	background-image: url(./img/back.jpg);
+	background-image: url(../img/back.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	font-family: 'Arimo', sans-serif;
@@ -55,7 +55,7 @@ body {
 }
 
 .box input {
-	width: 133%;
+	width: 100%;
 	margin-bottom: 15px;
 	border-radius: 5px;
 }
