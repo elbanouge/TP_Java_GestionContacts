@@ -23,6 +23,7 @@
 					value="Connexion"> <a href="#">Mot de passe oublié?</a><br>
 				<a href="registration.jsp">Créer un nouveau compte</a>
 			</form>
+			<a href="registration.xhtml">Créer un nouveau compte</a>
 		</div>
 	</div>
 </body>
