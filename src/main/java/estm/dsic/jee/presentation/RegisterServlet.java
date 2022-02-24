@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
 
 		User userModel = new User(name, email, password);
 
-		if (services.auth(userModel)) {
+		if (services.save(userModel)) {
 			response.sendRedirect("jsp/index.jsp");
 		} else {
 			response.sendRedirect("jsp/registration.jsp");

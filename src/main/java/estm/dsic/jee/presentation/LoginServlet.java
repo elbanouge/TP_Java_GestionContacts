@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		String logemail = request.getParameter("email");
 		String logpass = request.getParameter("password");
 
-		User user = services.save(logemail, logpass);
+		User user = services.auth(logemail, logpass);
 
 		if (user != null) {
 			HttpSession session = request.getSession();

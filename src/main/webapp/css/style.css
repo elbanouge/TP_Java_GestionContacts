@@ -129,7 +129,7 @@ body {
 }
 
 .regbox input {
-	width: 133%;
+	width: 100%;
 	margin-bottom: 15px;
 	border-radius: 5px;
 }

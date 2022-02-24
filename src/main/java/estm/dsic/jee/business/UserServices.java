@@ -15,13 +15,13 @@ public class UserServices implements IUserServices {
 	}
 
 	@Override
-	public boolean auth(User u) {
+	public boolean save(User u) {
 		// TODO Auto-generated method stub
 		return userDao.saveUser(u);
 	}
 
 	@Override
-	public User save(String email, String pass) {
+	public User auth(String email, String pass) {
 		// TODO Auto-generated method stub
 		return userDao.login(email, pass);
 	}
